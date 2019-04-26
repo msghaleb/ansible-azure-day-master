@@ -1,0 +1,10 @@
+---
+
+install_thinRDP_msi_version         : 'Thinfinity_Remote_Desktop_Workstation_Setup_x64.msi'
+install_thinRDP_ini_file            : 'Thinfinity.RemoteDesktop.Workstation.ini'
+install_thinRDP_download_directory  : 'C:\\Users\\{{ ansible_ssh_user }}\\Downloads'
+# https://www.cybelesoft.com/download/#trdp
+# v3.0
+install_thinRDP_msi_src             : 'https://azuredaystorageaccount.blob.core.windows.net/azureday-jumphost-packages/Thinfinity_Remote_Desktop_Workstation_Setup_x64.msi'
+install_thinRDP_msi_dest            : '{{ install_thinRDP_download_directory }}\\{{ install_thinRDP_msi_version }}'
+install_thinRDP_msi_check           : 'C:\\ProgramData\\Cybele Software\\Thinfinity\\Remote Desktop Workstation\\Thinfinity.RemoteDesktop.Workstation.ini'

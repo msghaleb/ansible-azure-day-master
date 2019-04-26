@@ -1,0 +1,24 @@
+---
+
+- name: Downloading ThinRDP
+  win_get_url:
+    url     : "{{ install_thinRDP_msi_src }}"
+    dest    : "{{ install_thinRDP_msi_dest }}"
+    force   : no
+
+- name: Installing ThinRDP - Demo
+  win_package:
+    path: "{{ install_thinRDP_msi_dest }}"
+    creates_path: "{{ install_thinRDP_msi_check }}"
+    state   : present
+    # wait    : true
+
+- name: Copy ThinRDP config file
+  win_copy:
+    src     : "{{ install_thinRDP_ini_file }}"
+    dest    : "{{ install_thinRDP_msi_check }}"
+  notify:
+    - restart thinRDP
+
+  tags:
+    - copy_thinrdp

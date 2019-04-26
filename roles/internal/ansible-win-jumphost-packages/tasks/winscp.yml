@@ -1,0 +1,14 @@
+---
+
+- name: Downloading WinSCP
+  win_get_url:
+    url  : "{{ winscp_src }}"
+    dest : "{{ winscp_dest }}"
+    force: no
+
+- name: Installing WinSCP
+  win_package:
+    name: "WinSCP"
+    path: "{{ winscp_dest}}"
+    Product_Id: "{{ winscp_check }}"
+    Arguments: "/VERYSILENT"

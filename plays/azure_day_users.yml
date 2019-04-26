@@ -1,0 +1,16 @@
+---
+
+- name: create azure day users and resource groups for them
+  gather_facts: False
+  become: False
+  connection: local
+  hosts: azure_day_users
+
+  roles:
+    - { role: ansible-azure-ad-users, azure_ad_state: "present" }
+    - { role: msg_pause, when: usercreated.changed }
+    - { role: ansible-azure-ad-users, azure_ad_state: "reset", when: not usercreated.changed }
+    - ansible-azure-ad-groups
+    - { role: ansible-azure-resource-groups, tags: [ 'resourcegroups' ] }
+    - ansible-azure-role-assignment
+    - ansible-send-mail

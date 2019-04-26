@@ -1,0 +1,10 @@
+galaxy_info:
+  description: "send mail"
+  min_ansible_version: 2.2
+  platforms:
+  - name: independent
+    versions:
+    - all
+  categories:
+  - system
+dependencies: []

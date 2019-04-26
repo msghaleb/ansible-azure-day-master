@@ -1,0 +1,9 @@
+---
+
+- name: Azure AD adding group members
+  azure_ad_groups:
+    group_id       : "{{ azure_ad_groups_group_id }}"
+    user_name      : "{{ azure_ad_groups_username }}"
+    tenant_domain  : "{{ azure_ad_groups_tenant_domain }}"
+    client_id      : "{{ azure_ad_groups_client_id }}"
+    client_secret  : "{{ azure_ad_groups_client_secret }}"

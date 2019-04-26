@@ -1,0 +1,13 @@
+---
+
+- name: Downloading Putty
+  win_get_url:
+    url  : "{{ putty_src }}"
+    dest : "{{ putty_dest }}"
+    force: no
+
+- name: Installing Putty
+  win_package:
+    path: "{{ putty_dest }}"
+    creates_path: "{{ putty_check }}"
+    state: present

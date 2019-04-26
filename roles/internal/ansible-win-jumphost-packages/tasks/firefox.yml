@@ -1,0 +1,13 @@
+---
+
+- name: Downloading firefox
+  win_get_url:
+    url  : "{{ firefox_src }}"
+    dest : "{{ firefox_dest }}"
+    force: no
+
+- name: Installing firefox
+  win_package:
+    path: "{{ firefox_dest }}"
+    creates_path: "{{ firefox_check }}"
+    state: present

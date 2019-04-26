@@ -1,0 +1,58 @@
+---
+
+# Firefox v. 66.0.3
+# https://support.mozilla.org/en-US/kb/deploy-firefox-msi-installers#w_msi-installers
+firefox_src   : "https://azuredaystorageaccount.blob.core.windows.net/azureday-jumphost-packages/firefox.msi"
+firefox_check : "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe"
+firefox_dest  : "C:\\temp\\Firefox-47.0-en-US.msi"
+#install_firefox : True
+
+# Notepad ++ v. 7.6.5
+# https://sourceforge.net/projects/notepadmsi/
+notepadpp_src   : "https://azuredaystorageaccount.blob.core.windows.net/azureday-jumphost-packages/notepad++.msi"
+notepadpp_check : "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"
+notepadpp_dest  : "C:\\temp\\npp.6.9.1.installer.msi"
+#install_notepadpp: True
+
+# WinSCP 5.15
+# https://winscp.net/eng/downloads.php
+winscp_src   : "https://azuredaystorageaccount.blob.core.windows.net/azureday-jumphost-packages/WinSCP.exe"
+winscp_check : "winscp3_is1"
+winscp_dest  : "C:\\temp\\winscp.exe"
+#install_winscp: True
+
+# Putty and PuttyKeygen v. 0.71
+# https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+putty_src   : "https://azuredaystorageaccount.blob.core.windows.net/azureday-jumphost-packages/putty.exe"
+putty_check : "C:\\Program Files (x86)\\PuTTY\\putty.exe"
+putty_dest  : "C:\\temp\\putty-0.67-installer.msi"
+#install_putty: True
+
+# Chrome v. 73
+# https://cloud.google.com/chrome-enterprise/browser/download/
+chrome_src   : "https://azuredaystorageaccount.blob.core.windows.net/azureday-jumphost-packages/chrome.msi"
+chrome_check : "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+chrome_dest  : "C:\\temp\\googlechromestandaloneenterprise64.msi"
+#install_chrome : True
+
+# Azure Data Studio (similar to: SQL Management Studio) v.1.6.0
+# https://docs.microsoft.com/en-us/sql/azure-data-studio/download?view=sql-server-2017
+ssms_src  : "https://azuredaystorageaccount.blob.core.windows.net/azureday-jumphost-packages/azuredatastudio.exe"
+ssms_dest : "C:\\temp\\SQLManagementStudio_x86_ENU.exe"
+#install_ssms : True
+
+# Shortcuts
+notepadpp_sc_src  : "C:\\Program Files (x86)\\Notepad++\\notepad++.exe"
+notepadpp_sc_dest : "C:\\Users\\Public\\Desktop\\Notepad++.lnk"
+
+puttykg_sc_src  : "C:\\Program Files (x86)\\PuTTY\\puttygen.exe"
+puttykg_sc_dest : "C:\\Users\\Public\\Desktop\\PuttyGen.lnk"
+
+#ssms_sc_src  : "C:\\Program Files (x86)\\Microsoft SQL Server\\120\\Tools\\Binn\\ManagementStudio\\Ssms.exe"
+#ssms_sc_dest : "C:\\Users\\Public\\Desktop\\SQL Server 2014 Management Studio.lnk"
+
+cmd_sc_src  : "C:\\Windows\\System32\\cmd.exe"
+cmd_sc_dest : "C:\\Users\\Public\\Desktop\\cmd.lnk"
+
+mstsc_sc_src  : "C:\\Windows\\System32\\mstsc.exe"
+mstsc_sc_dest : "C:\\Users\\Public\\Desktop\\Remote Desktop.lnk"

@@ -1,0 +1,16 @@
+---
+azure_windows_user: "{{ user_fname }}{{ user_lname }}"
+azure_windows_pass: "{{ lookup('password', '/tmp/azure_jump_pcs/' + inventory_hostname + '/ad_pass length=25') }}"
+#azure_windows_pass: "GB6VKOCx20cs93!"
+adminPassword: "{{ azure_windows_pass }}"
+adminUsername: "{{ azure_windows_user }}"
+ansible_ssh_pass: "{{ azure_windows_pass }}"
+ansible_ssh_user: "{{ azure_windows_user }}"
+dnsLabelPrefix: "{{ azure_windows_user|lower }}jumphost"
+resource_group_name: "{{ azure_windows_user|lower }}_jumphost"
+vmName: "{{ user_fname }}{{ user_lname }}"
+
+send_mail_subject     : "Your Jumpbox details"
+send_mail_body        : 'Dear {{ user_fname }} {{ user_lname }}, {{ new_line }}{{ new_line }}Your Azure Jumpbox has been created and ready to use, below are the needed details{{ a_colon }}{{ new_line }}{{ new_line }}Before you begin please make sure NOT to use Internet Explorer. Please use Firefox or Chrome for best experience.{{ new_line }}{{ new_line }}Please also make sure not to click connect automatically when opening the link below.{{ new_line }}{{ new_line }}Below are the needed details to access your Jumpbox{{ a_colon }}{{ new_line }}{{ new_line }}Name {{ a_colon }} {{ user_fname }}_{{ user_lname }}{{ new_line }}URL{{ a_colon }} https{{ a_colon }}//{{ azure_jumphostname }}{{ new_line }}IP Address{{ a_colon }}{{ ansible_ssh_host }}{{ new_line }}{{ new_line }}Username{{ a_colon }} {{ ansible_ssh_user }}{{ new_line }}Password{{ a_colon }} {{ ansible_ssh_pass }}{{ new_line }}{{ new_line }}Best Regards,{{ new_line }}CloudFirst Team{{ new_line }}'
+SMTP_To               : '{{ user_email }}'
+SMTP_From             : 'noreply@lh_azure_day.com'

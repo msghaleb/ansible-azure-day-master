@@ -1,0 +1,6 @@
+---
+
+- name: restart thinRDP
+  win_service:
+   name: RemoteDesktopWorkstationSvc
+   state: restarted

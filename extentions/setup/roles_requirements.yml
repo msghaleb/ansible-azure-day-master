@@ -1,0 +1,150 @@
+#
+# Requirements file is used to keep track of ansible role origins and versions
+# source code of roles is thus checked into the apphome-ansible repo, but we have an easy way to
+# update role dependencies.
+#
+# This means you should *NOT* update the code of third-party roles inside this repo,
+# instead make a pull request to them or download your fork of that version.
+#
+#
+#
+# REQUIRES ANSIBLE version 1.8+
+#
+# To update external roles run: ./role_update.sh
+#       Please note if the processes fails for some reason to comit or push your code
+#        until you resolved the issue. if not this might break the build
+#
+# for syntax see docs at http://docs.ansible.com/galaxy.html#advanced-control-over-role-requirements-files
+
+
+############################################
+### roles downloaded from ansible galaxy ###
+############################################
+
+  # TODO: MUST PIN version once its stable
+- src: git+https://github.com/AutomationWIthAnsible/ansible-aws-ec2
+  name: ansible-aws-ec2
+
+  # TODO: MUST PIN version once its stable
+- src: git+https://github.com/AutomationWithAnsible/ansible-aws-manage
+  name: ansible-aws-manage
+
+  # TODO: MUST PIN version once its stable
+
+- src: git+https://github.com/AutomationWithAnsible/ansible-aws-route53
+  name: ansible-aws-route53
+
+- src: git+https://github.com/AutomationWithAnsible/ansible-install.git
+  #version: "v0.1.0"
+  name: ansible-install
+
+- src: git+https://github.com/msghaleb/ansible-azure-ad-users.git
+  name: ansible-azure-ad-users
+
+- src: git+https://github.com/msghaleb/ansible-azure-ad-groups.git
+  name: ansible-azure-ad-groups
+
+- src: git+https://github.com/msghaleb/ansible-azure-role-assignment.git
+  name: ansible-azure-role-assignment
+
+- src: git+https://github.com/msghaleb/ansible-azure-resource-groups.git
+  name: ansible-azure-resource-groups
+
+- src: git+https://github.com/msghaleb/ansible-azure-vms.git
+  name: ansible-azure-vms
+
+- src: git+https://github.com/rvm/rvm1-ansible.git
+  name: ansible-ruby
+
+- src: git+https://github.com/AutomationWithAnsible/ansible-apt.git
+  name: ansible-apt
+
+- src: git+https://github.com/Stouts/Stouts.jenkins.git
+  version: "3.4.2"
+  name: ansible-jenkins
+
+- src: git+https://github.com/AutomationWithAnsible/ansible-gem.git
+  name: ansible-gem
+
+- src: git+https://github.com/AutomationWithAnsible/ansible-nginx.git
+  name: ansible-nginx
+
+- src: https://github.com/Stouts/Stouts.sudo.git
+  version: "2.1.0"
+  name: ansible-sudo
+
+- src: git+https://github.com/hellofresh/ansible-oauth2-proxy.git
+  name: ansible-oauth2-proxy
+
+- src: git@github.com:CloudFirstSAG/ansible-windows-os-hardening.git
+  #version: "v0.1.0"
+  name: ansible-windows-os-hardening
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-windows-os-patching.git
+  #version: "v0.1.0"
+  name: ansible-windows-os-patching
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-linux-os-hardening.git
+  #version: "v0.1.0"
+  name: ansible-linux-os-hardening
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-linux-squid.git
+  #version: "v0.1.0"
+  name: ansible-linux-squid
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-linux-squid.git
+  #version: "v0.1.0"
+  name: ansible-windows-linux-clamav
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-windows-user-management.git
+  #version: "v0.1.0"
+  name: ansible-windows-user-management
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-krb-ticket-gen.git
+  #version: "v0.1.0"
+  name: ansible-krb-ticket-gen
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-packer.git
+  #version: "v0.1.0"
+  name: ansible-packer
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-terraform.git
+  #version: "v0.1.0"
+  name: ansible-terraform
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-perl.git
+  #version: "v0.1.0"
+  name: ansible-perl
+  scm: git
+
+- src: https://github.com/msghaleb/guacamole-jumpserver.git
+  name: guacamole-jumpserver
+
+- src: git@github.com:CloudFirstSAG/ansible-windows-trendmicro-ds.git
+  name: ansible-windows-trendmicro-ds
+  scm: git
+
+- src: git@github.com:CloudFirstSAG/ansible-linux-trendmicro-ds.git
+  name: ansible-linux-trendmicro-ds
+  scm: git
+
+# - src: git@github.com:CloudFirstSAG/ansible-windows-carbonblack.git
+#   #version: "v0.1.0"
+#   name: ansible-windows-carbonblack
+
+# - src: git@github.com:CloudFirstSAG/ansible-linux-carbonblack.git
+#   #version: "v0.1.0"
+#   name: ansible-linux-carbonblack
+
+- src: git@github.com:CloudFirstSAG/ansible-win-ipins.git
+  name: ansible-win-ipins
+  scm: git

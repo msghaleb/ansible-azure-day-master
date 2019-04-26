@@ -1,0 +1,7 @@
+---
+
+group_id       : "{{ azure_ad_groups_group_id | default('group.test') }}"
+user_name       : "{{ azure_ad_groups_username | default('user.test') }}"
+tenant_domain  : "{{ azure_ad_groups_tenant_domain | default('AnsibleDirectory.onmicrosoft.com') }}"
+client_id      : "{{ azure_ad_groups_client_id | default('6359f1g62-6543-6789-124f-398763x98112') }}"
+client_secret  : "{{ azure_ad_groups_client_secret | default('HhCDbhsjkuHGiNhe+RE4aQsdjjrdof8cSd/q8F/iEDhx=') }}"

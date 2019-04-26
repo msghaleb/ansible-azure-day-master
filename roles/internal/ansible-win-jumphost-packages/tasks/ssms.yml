@@ -1,0 +1,17 @@
+---
+
+- name: Installing .Net Framework 3.5
+  win_feature:
+    name: "Net-Framework-Core"
+    state: present
+    restart: yes
+    include_sub_features: yes
+  tags: netframework
+  when: install_ssms == "True"
+
+- name: Downloading SQL Management Studio
+  win_get_url:
+    url  : "{{ ssms_src }}"
+    dest : "{{ ssms_dest }}"
+    force: no
+  when: install_ssms == "True"

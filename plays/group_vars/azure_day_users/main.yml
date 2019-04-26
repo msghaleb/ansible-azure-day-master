@@ -1,0 +1,44 @@
+---
+
+azuread_user_password  : "{{ lookup('password', '/tmp/azure_ad_users/' + inventory_hostname + '/ad_pass length=25') }}"
+#azuread_user_password : "x111WejEZedca2N8atQx"
+
+azure_ad_user                              : "{{ inventory_hostname }}"
+azure_ad_tenant_domain                     : "{{ tenant_domain }}"
+azure_ad_password                          : "{{ azuread_user_password }}"
+azure_ad_given_name                        : "{{ user_fname }}"
+azure_ad_surname                           : "{{ user_lname }}"
+azure_ad_display_name                      : "{{ user_fname }} {{ user_lname}}"
+azure_ad_client_id                         : "{{ client_id }}"
+azure_ad_client_secret                     : "{{ secret }}"
+#azure_ad_state                             : "reset"
+
+azure_role_assignment_subscription_id      : "{{ subscription_id }}"
+azure_role_assignment_tenant_domain        : "{{ tenant_domain  }}"
+azure_role_assignment_role_definition_name : "Owner" #This will be the role of the user on his/her resource group
+azure_role_assignment_client_id            : "{{ client_id }}"
+azure_role_assignment_client_secret        : "{{ secret }}"
+azure_role_assignment_user_name            : "{{ inventory_hostname }}"
+azure_role_assignment_resource_group_name  : "{{ inventory_hostname }}"
+
+azure_resource_groups_resource_group_name  : "{{ inventory_hostname }}"
+#azure_resource_groups_state                : "absent"
+azure_resource_groups_location             : "westeurope"
+azure_resource_groups_subscription_id      : "{{ subscription_id }}"
+azure_resource_groups_client_id            : "{{ client_id }}"
+azure_resource_groups_client_secret        : "{{ secret }}"
+azure_resource_groups_tenant_domain        : "{{ azure_ad_tenant_domain }}"
+
+time_to_pause_in_secs                      : "30"
+
+azure_ad_groups_group_id       : "{{ azure_ad_group_id }}" #This is the SandboxGroup ID in Azure AD where all users will be member of
+azure_ad_groups_username       : "{{ inventory_hostname }}"
+azure_ad_groups_tenant_domain  : "{{ azure_ad_tenant_domain }}"
+azure_ad_groups_client_id      : "{{ client_id }}"
+azure_ad_groups_client_secret  : "{{ secret }}"
+
+send_mail_subject     : "Your Azure Account Details"
+send_mail_body        : 'Dear {{ user_fname }} {{ user_lname }}, {{ new_line }}{{ new_line }}Your Azure Cloud login has been created and ready to use, below are the needed details{{ a_colon }}{{ new_line }}{{ new_line }}Please use Firefox or Chrome for best experience.{{ new_line }}{{ new_line }}The url is https{{ a_colon }}//portal.azure.com{{ new_line }}Username{{ a_colon }} {{ azure_ad_user }}@{{ azure_ad_tenant_domain  }}{{ new_line }}Password{{ a_colon }} {{ azure_ad_password }}{{ new_line }}{{ new_line }}If you are trying to connect to your Sandbox servers from behind a proxy, you may be facing difficulties accessing them using windows Remote Desktop and/or SSH.{{ new_line }}{{ new_line }}If this is the case please check this link to create you own jumphost with the needed tools (e.g. RDP, Putty …etc){{a_colon}}{{new_line}} https://link {{new_line}}{{new_line}}You can access your Jumpbox using your browser (RDP over HTTP) and from there you can RDP or SSH to your Sandbox based servers. Please also note that moving files between your client PC and the Jumpbox computer will not be possible, it will however have an Internet access.{{ new_line }}{{ new_line }}Best Regards,{{ new_line }}Your LH Azure Day Team{{ new_line }}'
+SMTP_To               : '{{ user_email }}'
+SMTP_From             : 'noreply@lh_azure_day.com'
+#SMTP_BCC              : ''

@@ -1,0 +1,26 @@
+
+# This is python packages that is required for some ansible modules
+pip
+PyYAML
+Jinja2
+httplib2
+xmltodict
+
+
+# used by dig lookup
+dnspython
+
+# AWS python boto
+boto
+boto3
+
+# WinRM for Windows management
+pywinrm
+
+# azure
+azure==2.0.0rc5
+msrest==0.4.1
+msrestazure==0.4.1
+
+# ansible tower
+ansible-tower-cli==3.0.0

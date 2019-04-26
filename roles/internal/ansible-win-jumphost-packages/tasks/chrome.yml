@@ -1,0 +1,13 @@
+---
+
+- name: Downloading Chrome
+  win_get_url:
+    url  : "{{ chrome_src }}"
+    dest : "{{ chrome_dest }}"
+    force: no
+
+- name: Installing Chrome
+  win_package:
+    path: "{{ chrome_dest }}"
+    creates_path: "{{ chrome_check }}"
+    state: present

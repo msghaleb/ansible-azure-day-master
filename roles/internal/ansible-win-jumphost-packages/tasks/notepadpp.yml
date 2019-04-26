@@ -1,0 +1,14 @@
+---
+
+- name: Downloading Notepad++
+  win_get_url:
+    url  : "{{ notepadpp_src }}"
+    dest : "{{ notepadpp_dest }}"
+    force: no
+
+- name: Installing Notepad++
+  win_package:
+    path: "{{ notepadpp_dest }}"
+    creates_path: "{{ notepadpp_check }}"
+    state: present
+

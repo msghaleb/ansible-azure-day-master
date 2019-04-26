@@ -1,0 +1,12 @@
+---
+
+jumphost_packages: []
+
+jumphost_shortcuts: []
+
+install_chrome: "True"
+install_firefox: "True"
+install_notepadpp: "True"
+install_putty: "True"
+install_ssms: "False"
+install_winscp: "True"

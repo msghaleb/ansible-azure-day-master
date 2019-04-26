@@ -1,0 +1,5 @@
+---
+
+- name: Pause for "{{ time_to_pause_in_secs }}" seconds
+  pause:
+    seconds : "{{ time_to_pause_in_secs }}"

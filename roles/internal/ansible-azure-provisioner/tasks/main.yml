@@ -1,0 +1,124 @@
+---
+
+#    - name: Prepare random postfix
+#      set_fact:
+#        rpfx: "{{ 100000 | random }}"
+#      run_once: yes
+- name: create Azure resource group
+  azure_rm_resourcegroup:
+    name: "{{ resource_group_name|lower }}"
+    location: '{{ location|lower }}'
+    state: present
+
+- name: create Azure a security group 
+  azure_rm_securitygroup:
+      resource_group: "{{ resource_group_name|lower }}"
+      name: "{{ vmName|lower }}"
+      purge_rules: yes
+      rules:
+          - name: 'AllowRDP'
+            protocol: Tcp
+            destination_port_range: 3389
+            access: Allow
+            priority: 100
+            direction: Inbound
+          - name: 'AllowWinRM'
+            protocol: Tcp
+            destination_port_range: 5986
+            access: Allow
+            priority: 101
+            direction: Inbound
+          - name: 'AllowHTTPS'
+            protocol: Tcp
+            destination_port_range: 443
+            access: Allow
+            priority: 102
+            direction: Inbound
+
+- name: create Azure virtual network in resource group
+  azure_rm_virtualnetwork:
+    name: "{{ vmName|lower }}"
+    resource_group: "{{ resource_group_name|lower }}"
+    address_prefixes_cidr:
+    - 10.1.0.0/16
+    state: present
+  
+- name: create Azure subnet in virtualnetwork
+  azure_rm_subnet:
+    name: '{{ vmName|lower }}'
+    state: present
+    virtual_network_name: "{{ vmName|lower }}"
+    resource_group: "{{ resource_group_name|lower }}"
+    address_prefix_cidr: 10.1.0.0/24
+
+- name: Create a public ip address
+  azure_rm_publicipaddress:
+    resource_group: "{{ resource_group_name|lower }}"
+    name: "{{ vmName|lower }}"
+    allocation_method: Dynamic
+    domain_name: "{{ dnsLabelPrefix|lower }}"
+  register: azure_public_domain
+
+- name: Create a network interface
+  azure_rm_networkinterface:
+    name: "{{ vmName|lower }}"
+    resource_group: "{{ resource_group_name|lower }}"
+    virtual_network: '{{ vmName|lower }}'
+    subnet_name: '{{ vmName|lower }}'
+    security_group_name: '{{ vmName|lower }}'
+    ip_configurations:
+      - name: "{{ vmName|lower }}"
+        public_ip_address_name: "{{ vmName|lower }}"
+        primary: True
+
+  #- name: create Azure storage account
+  #  azure_rm_storageaccount:
+  #    name: '{{ vmName }}'
+  #    resource_group: "{{ resource_group }}"
+  #    account_type: Standard_LRS
+
+- name: provision new Azure virtual host
+  azure_rm_virtualmachine:
+    admin_username: '{{ adminUsername|lower }}'
+    admin_password: "{{ adminPassword }}"
+    os_type: "{{ os_type }}"
+    image:
+      offer: "{{ imageOffer }}"
+      publisher: "{{ imagePublisher }}"
+      sku: "{{ imageSku }}"
+      version: latest
+    name: "{{ vmName|lower }}"
+    resource_group: "{{ resource_group_name|lower }}"
+    state: present
+    vm_size: "{{ vmSize }}"
+    network_interfaces: "{{ vmName|lower }}"
+    managed_disk_type: Standard_LRS
+    virtual_network_name: "{{ vmName|lower }}"
+    subnet_name: "{{ vmName|lower }}"
+  register: azure_jumphost_vm
+
+#- debug:
+#    var: azure_public_domain
+
+- name: create Azure vm extension to enable HTTPS WinRM listener
+  azure_rm_virtualmachine_extension:
+    name: winrm-extension
+    resource_group: "{{ resource_group_name|lower }}"
+    virtual_machine_name: "{{ vmName|lower }}"
+    publisher: Microsoft.Compute
+    virtual_machine_extension_type: CustomScriptExtension
+    type_handler_version: 1.9
+    settings: '{"commandToExecute": "powershell.exe -ExecutionPolicy ByPass -EncodedCommand {{winrm_enable_script}}"}'
+    auto_upgrade_minor_version: true
+
+- name: provision | Waiting for winrm port to open
+  wait_for:
+    port="{{ ansible_ssh_port | default('5986') }}"
+    host='{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
+    delay=1
+    timeout=1200
+
+- name: provision | set facts for ansible_ssh_host
+  set_fact:
+        ansible_ssh_host: '{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
+        azure_jumphostname: '{{ azure_public_domain.state.dns_settings.fqdn }}'

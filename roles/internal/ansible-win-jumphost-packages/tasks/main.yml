@@ -1,0 +1,37 @@
+---
+
+- name: Creating the temp directory
+  win_file:
+    path: "C:\\temp"
+    state: directory
+
+- include: chrome.yml
+  when: install_chrome == "True"
+
+- include: firefox.yml
+  when: install_firefox == "True"
+
+- include: putty.yml
+  when: install_putty == "True"
+
+- include: notepadpp.yml
+  when: install_notepadpp == "True"
+
+- include: winscp.yml
+  when: install_winscp == "True"
+
+#- include: ssms.yml
+
+- name: Creating Remote Desktop Shortcuts
+  win_shortcut:
+     src   : "{{ mstsc_sc_src }}"
+     dest  : "{{ mstsc_sc_dest }}"
+     force : false
+  tags: shortcuts
+
+- name: Creating CMD Shortcuts
+  win_shortcut:
+     src   : "{{ cmd_sc_src }}"
+     dest  : "{{ cmd_sc_dest }}"
+     force : false
+  tags: shortcuts

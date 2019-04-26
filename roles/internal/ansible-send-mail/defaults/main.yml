@@ -1,0 +1,13 @@
+---
+
+SMTP_Username         : ""
+SMTP_Password         : ""
+SMTP_Server           : ""
+SMTP_Port             : "587"
+send_mail_subject     : "Test Mail Subject"
+send_mail_body        : "Test Mail Body"
+SMTP_From             : ""
+SMTP_BCC              : ""
+SMTP_To               : ""
+new_line              : "\n"
+a_colon               : ":"
