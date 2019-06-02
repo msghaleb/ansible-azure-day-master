@@ -8,7 +8,7 @@
 
   roles:
     - { role: ansible-azure-ad-users, azure_ad_state: "present" }
-    - { role: msg_pause, when: usercreated.changed }
+    - { role: ansible-pause, time_to_pause_in_secs: '120', when: usercreated.changed }
     - { role: ansible-azure-ad-users, azure_ad_state: "reset", when: not usercreated.changed }
     - ansible-azure-ad-groups
     - { role: ansible-azure-resource-groups, tags: [ 'resourcegroups' ] }
