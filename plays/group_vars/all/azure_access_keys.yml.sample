@@ -1,0 +1,17 @@
+# uncomment all lines, fill up and rename to remove the .sample.
+# encrypt using the vault password!!! 
+
+#---
+
+#client_id              : "00000-000000-00000-000000-000000"
+#secret                 : ""
+#subscription_id        : "00000-000000-00000-000000-000000"
+#tenant                 : "00000-000000-00000-000000-000000"
+#tenant_domain          : "abc.onmicrosoft.com"
+
+#azure_ad_group_id      : "df3c024d-8d61-4599-b72c-b13e44bfd2b4"
+
+#SMTP_Username : ""
+#SMTP_Password : ""
+#SMTP_Server   : ""
+#SMTP_Port     : ""
